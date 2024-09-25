@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffeladora ☕</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="image/logoicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="background-icons"></div>
+    <div class="container">
+	<h2>Coffe ☕ ladora 🧮</h2>
+        <img src="https://imgur.com/ZYOQVgO.png" alt="Logo Coffeladora" class="logo">
+        <label for="salario">Salário Mensal (R$):</label>
+        <input type="number" id="salario" placeholder="Digite seu salário mensal" required>
+
+        <label for="tempo">Tempo de Café (em minutos):</label>
+        <input type="number" id="tempo" placeholder="Digite o tempo em minutos" required>
+
+        <button onclick="calcularGanho()">Calcular Ganho</button>
+
+        <h3 id="resultado"></h3>
+    </div>
+
+    <!-- Botão de Ajuda -->
+    <button class="help-button" onclick="toggleHelp()">
+        <i class="fas fa-question-circle"></i> Ajuda
+    </button>
+
+    <!-- Janela Modal de Ajuda -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleHelp()">&times;</span>
+            <h2>Ajuda</h2>
+            <p>Este site calcula o valor ganho por tempo durante a sua pausa para o café, com base no seu salário mensal e no tempo gasto em minutos.</p>
+        </div>
+    </div>
+
+    <script>
+        function calcularGanho() {
+            const salarioMensal = parseFloat(document.getElementById('salario').value);
+            const tempoMinutos = parseFloat(document.getElementById('tempo').value);
+            
+            const salarioPorHora = salarioMensal / (30 * 8);
+            const tempoHoras = tempoMinutos / 60;
+            const ganho = salarioPorHora * tempoHoras;
+
+            document.getElementById('resultado').innerText = `Você ganhou R$ ${ganho.toFixed(2)} durante sua pausa para o café.`;
+        }
+
+        function toggleHelp() {
+            const modal = document.getElementById('helpModal');
+            modal.classList.toggle('show');
+            modal.style.display = modal.classList.contains('show') ? "block" : "none";
+        }
+    </script>
+</body>
+</html>
